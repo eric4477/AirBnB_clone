@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 """ Convert the dictionary representation in python to a JSON string.
 	and JSON to a dictionary representation
 """
