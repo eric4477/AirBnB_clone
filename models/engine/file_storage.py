@@ -1,4 +1,6 @@
-
+""" Convert the dictionary representation in python to a JSON string.
+	and JSON to a dictionary representation
+"""
 
 class FileStorage():
 	""" Serializes instances to a JSON file and deserializes JSON file to instances.
