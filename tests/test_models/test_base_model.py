@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-
+Tests for the base model
 """
 import unittest
 
@@ -28,7 +28,7 @@ class TestBaseModel(unittest.TestCase):
         self.assertEqual(my_model_dict["__class__"], 'BaseModel')
         self.assertEqual(my_model_dict['id'], my_model.id)
         self.assertEqual(my_model_dict['created_at'], my_model.created_at.isoformat())
-        self.assertEqual(my_model_dict["updated_at"], my_model.created_at.isoformat())
+        self.assertEqual(my_model_dict["updated_at"], my_model.updated_at.isoformat())
 
     def test_str(self):
         my_model = BaseModel()
@@ -38,14 +38,7 @@ class TestBaseModel(unittest.TestCase):
         self.assertIn(my_model.id, str(my_model))
 
         self.assertIn(str(my_model.__dict__), str(my_model))
-        
+
 if __name__ == "__main__":
     unittest.main()
-
-
-
-
-    
-
-
     
