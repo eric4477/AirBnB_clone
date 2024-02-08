@@ -78,8 +78,7 @@ class HBNBCommand(cmd.Cmd):
         else:
             # fetch or get all the objects from storage
             objects = storage.all()
-            # saving the classname and the id in a key
-            # variable from the commands
+            # getting the <classname> and <id> from the commands
             key = "{}.{}".format(commands[0], commands[1])
             # if the key is in objects print the string 
             # representation of the instance
@@ -87,6 +86,61 @@ class HBNBCommand(cmd.Cmd):
                 print(objects[key])
             else:
                 print("** no instance found **")
+
+    def do_destroy(self, arg):
+        """
+        Deletes an instance based on the class name and id
+        usage: destroy <class_name> <id>
+        """
+        # saving the commands into a variable
+        commands = shlex.split(arg)
+        # checking if there is no commands
+        if len(commands) == 0:
+            print("** class name missing **")
+        # checking if the commands is not in valid_classes 
+        elif commands[0] not in self.valid_classes:
+            print("** class doesn't exist **")
+        # checking if the commands is missing the id
+        elif len(commands) < 2:
+            print("** instance id missing **")
+        else:
+            #fetch or get all the objects from storage
+            objects = storage.all()
+            # getting the <classname> and <id> from the commands
+            key = "{}.{}".format(commands[0], commands[1])
+            # if the key is found delete the object and save
+            if key in objects:
+                del objects[key]
+                storage.save()
+            else:
+                print("** no instance found **")
+
+    def do_all(self, arg):
+        """
+        Prints all string representation of all 
+        instances based or not on the class name
+        """
+        #fetch or get all the objects from storage
+        objects = storage.all()
+        # saving the commands into a variable
+        commands = shlex.split(arg)
+        # checking if there is no commands
+        if len(commands) == 0:
+        # loop in the objects and print the string
+        # representation for eack key
+            for key, value in objects.items():
+                print(str(value))
+        # checking if the commands is not in valid_classes 
+        elif commands[0] not in self.valid_classes:
+            print("** class doesn't exist **")  
+        # if the classname is in valid_classes loop in the 
+        # objects and find the exact classname and print 
+        # it's instance string representation
+        else:
+            for key, value in objects.items():
+                if key.split('.')[0] == commands[0]:
+                    print(str[value])
+        
 
     def emptyline(self):
         """
