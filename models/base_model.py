@@ -10,7 +10,7 @@ import models
 
 class BaseModel:
     def __init__(self, *args, **kwargs):  # updated T-5
-        if kwargs:
+        if kwargs: # if kwargs is not empty create object from dict
             self.id = kwargs["id"]
             self.created_at = kwargs["created_at"] 
             self.updated_at = kwargs["updated_at"] 
