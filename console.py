@@ -139,8 +139,58 @@ class HBNBCommand(cmd.Cmd):
         else:
             for key, value in objects.items():
                 if key.split('.')[0] == commands[0]:
-                    print(str[value])
-        
+                    print(str(value))
+
+    def do_update(self, arg):
+        """
+        Updates an instance based on the class name and id 
+        by adding or updating attribute (save the change into 
+        the JSON file).
+        """
+        # saving the commands into a variable
+        commands = shlex.split(arg)
+        # checking if there is no commands
+        if len(commands) == 0:
+            print("** class name missing **")
+        # checking if the commands is not in valid_classes 
+        elif commands[0] not in self.valid_classes:
+            print("** class doesn't exist **")
+         # checking if the commands is missing the id
+        elif len(commands) < 2:
+            print("** instance id missing **")
+        else:
+            #fetch or get all the objects from storage
+            objects = storage.all()
+            # getting the <classname> and <id> from the commands
+            key = "{}.{}".format(commands[0], commands[1])
+            if key not in objects:
+                print("** no instance found **")
+            # check if there is no attribute name
+            elif len(commands) < 3:
+                print("** attribute name missing **")
+            # check if there is no value for the attribute name
+            elif len(commands) < 4:
+                print("** value missing **")
+            # if the attribute name and attribute value exist
+            else:
+                #get the object from objects
+                obj = objects[key]
+                #get the the name attribute from commands
+                attrib_name = commands[2]
+                #get the the value attribute from commands
+                attrib_value = commands[3]
+                #try using the eval to attrib_value
+                try:
+                    attrib_value = eval(attrib_value)
+                except Exception:
+                    pass
+                #setting and saving the attributes to the 
+                #object
+                setattr(obj, attrib_name, attrib_value)
+                storage.save()   
+                
+
+
 
     def emptyline(self):
         """
