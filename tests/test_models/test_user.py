@@ -52,8 +52,10 @@ class TestUser(unittest.TestCase):
         self.assertIn("Mark", user_str)
         #check if the last name is in the string representation
         self.assertIn("Johnson", user_str)
-        #check if the <email> is in the string representation
+        #check if the email is in the string representation
         self.assertIn("mark@example.com", user_str)
+        #check if the password is in the string representation
+        self.assertIn("mark123", user_str)
 
 
 if __name__ == "__main__":
