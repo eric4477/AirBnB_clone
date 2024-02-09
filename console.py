@@ -6,13 +6,14 @@ from cmd.Cmd
 import cmd
 import shlex
 from models.base_model import BaseModel
+from models.user import User
 from models import storage
 
 
 class HBNBCommand(cmd.Cmd):
     """
     """
-    valid_classes = ["BaseModel"]
+    valid_classes = ["BaseModel", "User"]
     # adding custom prompt
     prompt = "(hbnb)"
 
@@ -44,18 +45,18 @@ class HBNBCommand(cmd.Cmd):
         Creates a new instance of BaseModel, 
         saves it (to the JSON file) and prints the id
         """
-        # saving the commands into a variable
-        commands = shlex.split(arg)
-        # checking if there is no commands
-        if len(commands) == 0:
+        # saving the args into a variable
+        args = shlex.split(arg)
+        # checking if there is no args
+        if len(args) == 0:
             print("** class name missing **")
-        # checking if the commands is not in valid_classes
-        elif commands[0] not in self.valid_classes:
+        # checking if the args is not in valid_classes
+        elif args[0] not in self.valid_classes:
             print("** class doesn't exist **")
-        # if the commands is in valid_classes, create a 
-        # new instance and save it (to the JSON file)
+        # if the args is in valid_classes, create a 
+        # new instance from the first arg and save it (to the JSON file)
         else:
-            new_instance = BaseModel()
+            new_instance = eval(f"{(args[0])}()")
             new_instance.save()
             print(new_instance.id)
 
@@ -64,22 +65,22 @@ class HBNBCommand(cmd.Cmd):
         Prints the string representation of an instance 
         based on the class name and id
         """
-        # saving the commands into a variable
-        commands = shlex.split(arg)
-        # checking if there is no commands
-        if len(commands) == 0:
+        # saving the args into a variable
+        args = shlex.split(arg)
+        # checking if there is no args
+        if len(args) == 0:
             print("** class name missing **")
-        # checking if the commands is not in valid_classes 
-        elif commands[0] not in self.valid_classes:
+        # checking if the args is not in valid_classes 
+        elif args[0] not in self.valid_classes:
             print("** class doesn't exist **")
-        # checking if the commands is missing the id
-        elif len(commands) < 2:
+        # checking if the args is missing the id
+        elif len(args) < 2:
             print("** instance id missing **")
         else:
             # fetch or get all the objects from storage
             objects = storage.all()
-            # getting the <classname> and <id> from the commands
-            key = "{}.{}".format(commands[0], commands[1])
+            # getting the <classname> and <id> from the args
+            key = "{}.{}".format(args[0], args[1])
             # if the key is in objects print the string 
             # representation of the instance
             if key in objects:
@@ -92,22 +93,22 @@ class HBNBCommand(cmd.Cmd):
         Deletes an instance based on the class name and id
         usage: destroy <class_name> <id>
         """
-        # saving the commands into a variable
-        commands = shlex.split(arg)
-        # checking if there is no commands
-        if len(commands) == 0:
+        # saving the args into a variable
+        args = shlex.split(arg)
+        # checking if there is no args
+        if len(args) == 0:
             print("** class name missing **")
-        # checking if the commands is not in valid_classes 
-        elif commands[0] not in self.valid_classes:
+        # checking if the args is not in valid_classes 
+        elif args[0] not in self.valid_classes:
             print("** class doesn't exist **")
-        # checking if the commands is missing the id
-        elif len(commands) < 2:
+        # checking if the args is missing the id
+        elif len(args) < 2:
             print("** instance id missing **")
         else:
             #fetch or get all the objects from storage
             objects = storage.all()
-            # getting the <classname> and <id> from the commands
-            key = "{}.{}".format(commands[0], commands[1])
+            # getting the <classname> and <id> from the args
+            key = "{}.{}".format(args[0], args[1])
             # if the key is found delete the object and save
             if key in objects:
                 del objects[key]
@@ -122,23 +123,23 @@ class HBNBCommand(cmd.Cmd):
         """
         #fetch or get all the objects from storage
         objects = storage.all()
-        # saving the commands into a variable
-        commands = shlex.split(arg)
-        # checking if there is no commands
-        if len(commands) == 0:
+        # saving the args into a variable
+        args = shlex.split(arg)
+        # checking if there is no args
+        if len(args) == 0:
         # loop in the objects and print the string
         # representation for eack key
             for key, value in objects.items():
                 print(str(value))
-        # checking if the commands is not in valid_classes 
-        elif commands[0] not in self.valid_classes:
+        # checking if the args is not in valid_classes 
+        elif args[0] not in self.valid_classes:
             print("** class doesn't exist **")  
         # if the classname is in valid_classes loop in the 
         # objects and find the exact classname and print 
         # it's instance string representation
         else:
             for key, value in objects.items():
-                if key.split('.')[0] == commands[0]:
+                if key.split('.')[0] == args[0]:
                     print(str(value))
 
     def do_update(self, arg):
@@ -147,38 +148,38 @@ class HBNBCommand(cmd.Cmd):
         by adding or updating attribute (save the change into 
         the JSON file).
         """
-        # saving the commands into a variable
-        commands = shlex.split(arg)
-        # checking if there is no commands
-        if len(commands) == 0:
+        # saving the args into a variable
+        args = shlex.split(arg)
+        # checking if there is no args
+        if len(args) == 0:
             print("** class name missing **")
-        # checking if the commands is not in valid_classes 
-        elif commands[0] not in self.valid_classes:
+        # checking if the args is not in valid_classes 
+        elif args[0] not in self.valid_classes:
             print("** class doesn't exist **")
-         # checking if the commands is missing the id
-        elif len(commands) < 2:
+         # checking if the args is missing the id
+        elif len(args) < 2:
             print("** instance id missing **")
         else:
             #fetch or get all the objects from storage
             objects = storage.all()
-            # getting the <classname> and <id> from the commands
-            key = "{}.{}".format(commands[0], commands[1])
+            # getting the <classname> and <id> from the args
+            key = "{}.{}".format(args[0], args[1])
             if key not in objects:
                 print("** no instance found **")
             # check if there is no attribute name
-            elif len(commands) < 3:
+            elif len(args) < 3:
                 print("** attribute name missing **")
             # check if there is no value for the attribute name
-            elif len(commands) < 4:
+            elif len(args) < 4:
                 print("** value missing **")
             # if the attribute name and attribute value exist
             else:
                 #get the object from objects
                 obj = objects[key]
-                #get the the name attribute from commands
-                attrib_name = commands[2]
-                #get the the value attribute from commands
-                attrib_value = commands[3]
+                #get the the name attribute from args
+                attrib_name = args[2]
+                #get the the value attribute from args
+                attrib_value = args[3]
                 #try using the eval to attrib_value
                 try:
                     attrib_value = eval(attrib_value)
