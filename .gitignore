@@ -1,2 +1,5 @@
 # ignore outo create files in VS code 
 __pycache__
+
+# ignore json files
+*.json
