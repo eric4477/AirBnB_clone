@@ -10,12 +10,12 @@ import models
 
 class BaseModel:
     def __init__(self, *args, **kwargs):  # updated T-5
-        if kwargs: # if kwargs is not empty create object from dict
+        if kwargs:  # if kwargs is not empty create object from dict
             self.id = kwargs["id"]
-            self.created_at = kwargs["created_at"] 
-            self.updated_at = kwargs["updated_at"] 
-            self.name = kwargs["name"] 
-            self.my_number = kwargs["my_number"] 
+            self.created_at = kwargs["created_at"]
+            self.updated_at = kwargs["updated_at"]
+            self.name = kwargs["name"]
+            self.my_number = kwargs["my_number"]
 
         self.id = str(uuid.uuid4())
         self.created_at = datetime.now()
@@ -36,7 +36,7 @@ class BaseModel:
         updated_at with the current datetime.
         """
         self.updated_at = datetime.now()
-        models.storage.save() # storage: is a FileStorge instance
+        models.storage.save()  # storage: is a FileStorge instance
 
     def to_dict(self):
         """
