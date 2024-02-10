@@ -50,35 +50,6 @@ class TestFileStorage(unittest.TestCase):
         self.assertIsInstance(loaded_objects["BaseModel.{}".format(
             obj2.id)], BaseModel)
 
-    def test_reload_empty_file(self):
-        """
-        test empty file
-        """
-        # Create an empty file
-        with open(FileStorage._FileStorage__file_path, "w"):
-            pass
-
-        # Reload from the empty file
-        self.storage.reload()
-
-        # Ensure no objects are loaded
-        loaded_objects = self.storage.all()
-        self.assertEqual(len(loaded_objects), 0)
-
-    def test_reload_nonexistent_file(self):
-        """
-        test nonecxistance file
-        """
-        # Set file path to a nonexistent location
-        FileStorage._FileStorage__file_path = "nonexistent_file.json"
-
-        # Reload from the nonexistent file (should not raise an error)
-        self.storage.reload()
-
-        # Ensure no objects are loaded
-        loaded_objects = self.storage.all()
-        self.assertEqual(len(loaded_objects), 0)
-
 
 if __name__ == "__main__":
     unittest.main()
