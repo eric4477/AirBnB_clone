@@ -1,11 +1,20 @@
+#!/usr/bin/python3
+""" tests for User class"""
 import unittest
 from models import storage
 from models.base_model import BaseModel
 from models.user import User
 
+
 class TestUser(unittest.TestCase):
+    """
+    represent a test
+    """
 
     def test_user_attributes(self):
+        """
+        test attributes
+        """
         # create a new instance of User
         user = User()
         # checking if the default first_name attribute is an empty string
@@ -17,14 +26,19 @@ class TestUser(unittest.TestCase):
         # checking if the default password attribute is an empty string
         self.assertEqual(user.password, "")
 
-
     def test_user_inherits_from_base_model(self):
+        """
+        test inherits
+        """
         # create a new instance of User
         user = User()
         # checking if the user class is a subclass of BaseModel
         self.assertTrue(issubclass(User, BaseModel))
 
     def test_usr_str_representation(self):
+        """
+        test user string reprsentation
+        """
         # create a new instance of User
         user = User()
         # set the attributes for the User instance attributes
