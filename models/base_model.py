@@ -10,17 +10,19 @@ import models
 
 class BaseModel:
     def __init__(self, *args, **kwargs):  # updated T-5
-        if kwargs:  # if kwargs is not empty create object from dict
-            self.id = kwargs["id"]
-            self.created_at = kwargs["created_at"]
-            self.updated_at = kwargs["updated_at"]
-            self.name = kwargs["name"]
-            self.my_number = kwargs["my_number"]
-
         self.id = str(uuid.uuid4())
         self.created_at = datetime.now()
         self.updated_at = datetime.now()
-        models.storage.new(self)  # for task 5
+
+        if kwargs:  # if kwargs is not empty create object from dict
+            tform = "%Y-%m-%dT%H:%M:%S.%f"
+            self.id = kwargs["id"]
+            self.created_at = datetime.strptime(kwargs["created_at"], tform)
+            self.updated_at = datetime.strptime(kwargs["updated_at"], tform)
+            self.name = kwargs["name"]
+            self.my_number = kwargs["my_number"]
+        else:
+            models.storage.new(self)  # for task 5
 
     def __str__(self):
         """
