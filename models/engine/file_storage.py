@@ -20,7 +20,10 @@ class FileStorage:
     __file_path = "file.json"   # class attribute
     __objects = {}              # class attribute
 
-    def all(self):  # returns the dictionary of all objects
+    def all(self):
+        """
+        returns the dictionary of all objects
+        """
         return FileStorage.__objects
 
     def new(self, obj):
@@ -40,7 +43,7 @@ class FileStorage:
         for obj in all_obj.keys():
             obj_dict[obj] = all_obj[obj].to_dict()
         # open a file and save json str to it
-        with open(FileStorage.__file_path, "w") as my_file:
+        with open(FileStorage.__file_path, "w", encoding="utf-8") as my_file:
             json.dump(obj_dict, my_file)
 
     def reload(self):
@@ -52,7 +55,7 @@ class FileStorage:
 
         try:
             if os.path.isfile(FileStorage.__file_path):  # if file exist
-                with open(FileStorage.__file_path, "r") as my_file:
+                with open(FileStorage.__file_path, "r", encoding="utf-8") as my_file:
                     objs = json.load(my_file)  # load a dictionary form a file
 
                     for values in objs.values():
