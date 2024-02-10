@@ -65,5 +65,5 @@ class FileStorage:
                         instance = cls(**values)   # create instance
 
                     FileStorage.__objects['id'] = instance
-        except FileNotFoundError:  # if file note found do nothing
+        except Exception:  # if file note found do nothing
             return
