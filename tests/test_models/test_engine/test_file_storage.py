@@ -1,4 +1,4 @@
-
+#!/usr/bin/python3
 """ model for testing file storage"""
 
 import unittest
@@ -45,8 +45,10 @@ class TestFileStorage(unittest.TestCase):
         loaded_objects = self.storage.all()
         self.assertIn("BaseModel.{}".format(obj1.id), loaded_objects)
         self.assertIn("BaseModel.{}".format(obj2.id), loaded_objects)
-        self.assertIsInstance(loaded_objects["BaseModel.{}".format(obj1.id)], BaseModel)
-        self.assertIsInstance(loaded_objects["BaseModel.{}".format(obj2.id)], BaseModel)
+        self.assertIsInstance(loaded_objects["BaseModel.{}".format(
+            obj1.id)], BaseModel)
+        self.assertIsInstance(loaded_objects["BaseModel.{}".format(
+            obj2.id)], BaseModel)
 
     def test_reload_empty_file(self):
         """
