@@ -55,15 +55,12 @@ class FileStorage:
 
         try:
             if os.path.isfile(FileStorage.__file_path):  # if file exist
-                with open(FileStorage.__file_path, "r", encoding="utf-8") as my_file:
-                    objs = json.load(my_file)  # load a dictionary form a file
+                with open(FileStorage.__file_path, "r", encoding="utf-8") as f:
+                    objs = json.load(f)  # load a dictionary form a file
 
-                    for values in objs.values():
-                        # get the class name
-                        cls_name = values["__class__"]
-                        cls = eval(cls_name)  # get the actual class
-                        instance = cls(**values)   # create instance
+                    for key, value in objs.items():
+                        class_name, obj_id = key.split('.')
+                        self.__objects[key] = eval(class_name)(**value)
 
-                    FileStorage.__objects['id'] = instance
         except Exception:  # if file note found do nothing
             return
