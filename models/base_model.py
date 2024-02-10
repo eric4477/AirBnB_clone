@@ -16,11 +16,11 @@ class BaseModel:
 
         if kwargs:  # if kwargs is not empty create object from dict
             tform = "%Y-%m-%dT%H:%M:%S.%f"
-            self.id = kwargs["id"]
-            self.created_at = datetime.strptime(kwargs["created_at"], tform)
-            self.updated_at = datetime.strptime(kwargs["updated_at"], tform)
-            self.name = kwargs["name"]
-            self.my_number = kwargs["my_number"]
+            for key, value in kwargs.items():
+                if key == "created_at" or key == "updated_at":
+                    self.__dict__[key] = datetime.strptime(value, tform)
+                else:
+                    self.__dict__[key] = value
         else:
             models.storage.new(self)  # for task 5
 
