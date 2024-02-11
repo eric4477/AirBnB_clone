@@ -13,7 +13,7 @@ from models import storage
 class HBNBCommand(cmd.Cmd):
     """
     """
-    valid_classes = ["BaseModel", "User"]
+    valid_classes = ["BaseModel", "User", "Place", "State", "City", "Amenity", "Review"]
     #  adding custom prompt
     prompt = "(hbnb)"
 
