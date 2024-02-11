@@ -3,7 +3,6 @@
 from models.base_model import BaseModel
 
 
-
 class Review(BaseModel):
     """A class to represent reviews.
     Class Attributes:
