@@ -12,11 +12,17 @@ Welcome to the AirBnB clone project!
 
 # how to start it
 - step 1: clone the repository:    
-```$ git clone https://github.com/eric4477/AirBnB_clone.git```    
+```
+$ git clone https://github.com/eric4477/AirBnB_clone.git
+```    
 - step 2: get into the project by typing:   
-```$ cd AirBnB_clone```    
+```
+$ cd AirBnB_clone 
+```    
 - step 3: run it:   
-```$ ./console.py```    
+```
+$ ./console.py
+```    
 
 # how to use it
 - For interactive mode  
