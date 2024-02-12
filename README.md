@@ -11,10 +11,64 @@ Welcome to the AirBnB clone project!
 - Destroy an object
 
 # how to start it
+- step 1: clone the repository:    
+```$ git clone https://github.com/eric4477/AirBnB_clone.git```    
+- step 2: get into the project by typing:   
+```$ cd AirBnB_clone```    
+- step 3: run it:   
+```$ ./console.py```    
 
 # how to use it
+- For interactive mode  
+```  
+ ~/AirBnB_clone$  ./console.py     
+(hbnb)help   
+   
+Documented commands (type help <topic>):    
+========================================    
+EOF  all  create  destroy  help  quit  show  update    
 
-# examples
+(hbnb)create User    
+3dfa4824-a257-4efd-a652-9c8179296fb8    
+(hbnb)
+```
+- non-interactive mode    
+```
+~/AirBnB_clone $ echo "help" | ./console.py    
+(hbnb)
+
+Documented commands (type help <topic>):
+========================================
+EOF  help  quit
+(hbnb) 
+~/AirBnB_clone $
+~/AirBnB_clone $ cat test_help
+help
+~/AirBnB_clone $
+~/AirBnB_clone $ cat test_help | ./console.py
+(hbnb)
+
+Documented commands (type help <topic>):
+========================================
+EOF  help  quit
+(hbnb) 
+~/AirBnB_clone $
+```
+
+# examples   
+- Using *create* command to create new user     
+```  
+ ~/AirBnB_clone$  ./console.py     
+(hbnb)help   
+   
+Documented commands (type help <topic>):    
+========================================    
+EOF  all  create  destroy  help  quit  show  update    
+
+(hbnb)create User    
+3dfa4824-a257-4efd-a652-9c8179296fb8    
+(hbnb)
+```
 
 ## Acknowledgements :pray:
 
