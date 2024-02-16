@@ -8,6 +8,10 @@
   position: relative;
 }
 
+.filters ul {
+  list-style-type: none;
+}
+
 .filters button {
   font-size: 18px;
   background-color: #ff5a5f;
@@ -34,6 +38,7 @@
   flex-direction: column;
   justify-content: center;
   padding-left: 30px;
+  position: relative;
 }
 
 .filters > div:first-of-type {
@@ -47,4 +52,45 @@
 .filters > div > h4 {
   font-weight: 400;
   font-size: 14px;
+}
+.popover {
+  display: none;
+  background-color: #fafafa;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  transform: translateY(100%);
+  width: 100%;
+  border: 1px solid #dddddd;
+  border-radius: 4px;
+  padding: 30px;
+}
+
+.locations:hover .popover,
+.amenities:hover .popover {
+  display: flex;
+  flex-direction: column;
+}
+
+.locations > .popover {
+  gap: 30px;
+}
+
+.locations .popover li ul {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.amenities > .popover {
+  gap: 4px;
+}
+
+.popover > h2 {
+  font-size: 16px;
+}
+
+.popover ul {
+  padding-left: 16px;
+  padding-top: 4px;
 }
